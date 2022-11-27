@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {TbLayoutBoardSplit} from 'react-icons/tb';
-import {BiHide} from 'react-icons/bi';
+import {BiHide, BiShow} from 'react-icons/bi';
 import {FiMoreVertical} from 'react-icons/fi';
 import data from './data.json';
 
@@ -8,21 +8,24 @@ function App() {
 
    const [boards, setBoards] = useState<object[]>(data.boards);
    const [boardSelected, setSelected] = useState<string>('Platform Launch');
+   const [sidebar, setSideBar] = useState<boolean>(true);
 
     const handleBoardSelect = (e : React.MouseEvent<HTMLElement>, boardName : any) => {
         setSelected(boardName);
     }
 
     return (
-    <div className="w-full h-screen grid grid-cols-6">
-        <div className="col-span-1 bg-slate-800 border-r border-gray-700">
-            <div className="w-3/4 h-24 flex justify-center items-center">
-                <img
-                    src="../assets/logo-light.svg"
-                    alt="logo"
-                />
+    <div className="w-full h-screen grid grid-cols-6 overflow-y-hidden bg-slate-900">
+        <div className={`col-span-1 ${sidebar ? "border-r border-gray-700" : null}`}>
+            <div className={`${sidebar ? null : "border-r border-gray-700"} w-full h-24 bg-slate-800`}>
+                <div className="w-3/4 h-full flex justify-center items-center">
+                    <img
+                        src="../assets/logo-light.svg"
+                        alt="logo"
+                    />
+                </div>
             </div>
-            <div className="w-4/5 h-3/4">
+            <div className={`${sidebar ? "w-full h-full bg-slate-800" : "invisible"}`}>
                 <div className="w-full text-gray-400 font-medium">
                     <h1 className="text-sm ml-6">
                         ALL BOARDS ({boards.length})
@@ -46,15 +49,21 @@ function App() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="w-full flex items-end justify-center text-gray-400 font-medium">
-                <div className="w-4/5 h-12 bg-slate-900 rounded-md flex flex-row items-center justify-center space-x-3">
-                    <BiHide className="text-xl" />
-                    <p>
-                        Hide Sidebar
-                    </p>
+                <div className="w-full h-full flex justify-center items-center text-gray-400 font-medium">
+                    <div onClick={e => setSideBar(false)} className="w-4/5 h-12 bg-slate-900 rounded-md flex flex-row items-center justify-center space-x-3">
+                        <BiHide className="text-xl" />
+                        <p>
+                            Hide Sidebar
+                        </p>
+                    </div>
                 </div>
             </div>
+            {!sidebar ?
+                <div className="h-full flex items-center">
+                    <button className="p-4 rounded-r-full bg-indigo-500" onClick={e => setSideBar(true)}>
+                       <BiShow className="text-2xl text-white" />
+                    </button>
+                </div> : null}
         </div>
         <div className="col-span-5 bg-slate-900">
             <div className="w-full h-24 bg-slate-800 flex">
