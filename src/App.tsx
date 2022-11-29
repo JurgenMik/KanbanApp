@@ -3,15 +3,21 @@ import {TbLayoutBoardSplit} from 'react-icons/tb';
 import {BiHide, BiShow} from 'react-icons/bi';
 import {FiMoreVertical} from 'react-icons/fi';
 import data from './data.json';
+import AddBoard from "./components/AddBoard";
 
 function App() {
 
    const [boards, setBoards] = useState<object[]>(data.boards);
    const [boardSelected, setSelected] = useState<string>('Platform Launch');
    const [sidebar, setSideBar] = useState<boolean>(true);
+   const [newBoard, setNewBoard] = useState<boolean>(false);
 
     const handleBoardSelect = (e : React.MouseEvent<HTMLElement>, boardName : any) => {
         setSelected(boardName);
+    }
+
+    const handleNewBoard = () => {
+        setNewBoard(!newBoard);
     }
 
     return (
@@ -43,7 +49,7 @@ function App() {
                         })}
                         <div className="flex items-center space-x-3 text-indigo-500 mt-2">
                             <TbLayoutBoardSplit className="text-xl" />
-                            <h1>
+                            <h1 onClick={handleNewBoard}>
                                 +Create New Board
                             </h1>
                         </div>
@@ -65,7 +71,7 @@ function App() {
                     </button>
                 </div> : null}
         </div>
-        <div className="col-span-5 bg-slate-900">
+        <div className="col-span-5 bg-slate-900 relative">
             <div className="w-full h-24 bg-slate-800 flex">
                 <div className="w-4/5 h-full flex items-center">
                     <h1 className="text-2xl text-white font-medium ml-6 items-center">
@@ -78,6 +84,9 @@ function App() {
                     </button>
                     <FiMoreVertical className="text-indigo-400 text-2xl" />
                 </div>
+            </div>
+            <div className="w-full h-full">
+                {newBoard ? <AddBoard boards={boards} setNewBoard={setNewBoard} setBoards={setBoards} /> : null}
             </div>
         </div>
     </div>
