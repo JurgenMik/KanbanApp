@@ -53,7 +53,7 @@ function AddBoard({boards, setNewBoard, setBoards} : any) {
                     <input
                         name="boardName"
                         type="text"
-                        className="p-2 bg-slate-800 border border-gray-700 rounded-md text-white"
+                        className="p-2 bg-slate-800 border border-gray-700 rounded-md text-gray-400"
                         placeholder="e.g Web Design"
                         onChange={handleNameChange}
                     />
@@ -66,7 +66,7 @@ function AddBoard({boards, setNewBoard, setBoards} : any) {
                         return (
                             <span className="h-12 flex items-center space-x-2" key={index}>
                                 <input
-                                    className="w-4/5 p-2 bg-slate-800 border border-gray-700 rounded-md text-gray-700 mb-2"
+                                    className="w-4/5 p-2 bg-slate-800 border border-gray-700 rounded-md text-gray-400 mb-2"
                                     type="text"
                                     name="columnName"
                                     onChange={e => handleColumnChange(e, index)}

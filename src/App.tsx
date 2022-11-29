@@ -39,15 +39,16 @@ function App() {
                     <div className="mt-6 ml-6">
                         {boards.map((data : any) => {
                             return (
-                                <div className={`${boardSelected === data.name ? "bg-indigo-500 text-white" : null} h-12 flex items-center space-x-3 rounded-r-full`} key={data.name}>
+                                <div onClick={e => handleBoardSelect(e, data.name)}
+                                     className={`${boardSelected === data.name ? "bg-indigo-500 text-white" : null} h-12 flex items-center space-x-3 rounded-r-full pl-2 hover:bg-white hover:text-indigo-500`} key={data.name}>
                                     <TbLayoutBoardSplit className="text-xl" />
-                                    <h1 onClick={ e => handleBoardSelect(e, data.name)}>
+                                    <h1>
                                         {data.name}
                                     </h1>
                                 </div>
                             )
                         })}
-                        <div className="flex items-center space-x-3 text-indigo-500 mt-2">
+                        <div className="flex items-center space-x-3 text-indigo-500 mt-2 pl-2">
                             <TbLayoutBoardSplit className="text-xl" />
                             <h1 onClick={handleNewBoard}>
                                 +Create New Board
@@ -58,7 +59,7 @@ function App() {
                 <div className="w-full h-full flex justify-center items-center text-gray-400 font-medium">
                     <div onClick={e => setSideBar(false)} className="w-4/5 h-12 bg-slate-900 rounded-md flex flex-row items-center justify-center space-x-3">
                         <BiHide className="text-xl" />
-                        <p>
+                        <p className="hover:text-gray-300">
                             Hide Sidebar
                         </p>
                     </div>
@@ -66,7 +67,7 @@ function App() {
             </div>
             {!sidebar ?
                 <div className="h-full flex items-center">
-                    <button className="p-4 rounded-r-full bg-indigo-500" onClick={e => setSideBar(true)}>
+                    <button className="p-4 rounded-r-full bg-indigo-500 hover:bg-indigo-400" onClick={e => setSideBar(true)}>
                        <BiShow className="text-2xl text-white" />
                     </button>
                 </div> : null}
