@@ -11,6 +11,7 @@ function App() {
    const [boardSelected, setSelected] = useState<string>('Platform Launch');
    const [sidebar, setSideBar] = useState<boolean>(true);
    const [newBoard, setNewBoard] = useState<boolean>(false);
+   const [boardOptions, setOptions] = useState<boolean>(false);
 
     const handleBoardSelect = (e : React.MouseEvent<HTMLElement>, boardName : any) => {
         setSelected(boardName);
@@ -18,6 +19,16 @@ function App() {
 
     const handleNewBoard = () => {
         setNewBoard(!newBoard);
+    }
+
+    const handleBoardOptions = () => {
+        setOptions(!boardOptions)
+    }
+
+    const handleBoardDelete = () => {
+        setBoards(boards.filter((board : any) => boardSelected !== board.name));
+
+        setOptions(false);
     }
 
     return (
@@ -79,11 +90,24 @@ function App() {
                         {boardSelected}
                     </h1>
                 </div>
-                <div className="w-1/5 flex items-center justify-center space-x-2">
+                <div className="w-1/5 flex items-center justify-center space-x-2 relative">
                     <button className="w-1/2 p-3 bg-indigo-500 rounded-full text-white font-medium">
                         +Add New Task
                     </button>
-                    <FiMoreVertical className="text-indigo-400 text-2xl" />
+                    <FiMoreVertical
+                        onClick={handleBoardOptions}
+                        className="text-indigo-400 text-2xl hover:text-indigo-200"
+                    />
+                    {boardOptions ?
+                        <div className="absolute w-48 h-20 bg-slate-900 top-20 flex flex-col justify-center rounded-md pl-4 space-y-2">
+                            <h1 className="text-gray-400">
+                                Edit Board
+                            </h1>
+                            <h1 onClick={handleBoardDelete} className="text-red-600">
+                                Delete Board
+                            </h1>
+                        </div>
+                    : null}
                 </div>
             </div>
             <div className="w-full h-full">
