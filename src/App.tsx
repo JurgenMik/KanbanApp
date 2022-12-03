@@ -4,6 +4,7 @@ import {BiHide, BiShow} from 'react-icons/bi';
 import {FiMoreVertical} from 'react-icons/fi';
 import data from './data.json';
 import AddBoard from "./components/AddBoard";
+import DeleteBoard from "./components/DeleteBoard";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
    const [sidebar, setSideBar] = useState<boolean>(true);
    const [newBoard, setNewBoard] = useState<boolean>(false);
    const [boardOptions, setOptions] = useState<boolean>(false);
+   const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
     const handleBoardSelect = (e : React.MouseEvent<HTMLElement>, boardName : any) => {
         setSelected(boardName);
@@ -25,8 +27,8 @@ function App() {
         setOptions(!boardOptions)
     }
 
-    const handleBoardDelete = () => {
-        setBoards(boards.filter((board : any) => boardSelected !== board.name));
+    const handleBoardDeleteModal = () => {
+        setDeleteModal(true);
 
         setOptions(false);
     }
@@ -99,11 +101,11 @@ function App() {
                         className="text-indigo-400 text-2xl hover:text-indigo-200"
                     />
                     {boardOptions ?
-                        <div className="absolute w-48 h-20 bg-slate-900 top-20 flex flex-col justify-center rounded-md pl-4 space-y-2">
+                        <div className="absolute w-48 h-20 bg-slate-900 top-20 flex flex-col justify-center rounded-md pl-4 space-y-2 font-medium">
                             <h1 className="text-gray-400">
                                 Edit Board
                             </h1>
-                            <h1 onClick={handleBoardDelete} className="text-red-600">
+                            <h1 onClick={handleBoardDeleteModal} className="text-red-600">
                                 Delete Board
                             </h1>
                         </div>
@@ -112,6 +114,7 @@ function App() {
             </div>
             <div className="w-full h-full">
                 {newBoard ? <AddBoard boards={boards} setNewBoard={setNewBoard} setBoards={setBoards} /> : null}
+                {deleteModal ? <DeleteBoard boards={boards} setDeleteModal={setDeleteModal} setBoards={setBoards} boardSelected={boardSelected} /> : null}
             </div>
         </div>
     </div>
