@@ -5,6 +5,7 @@ import {FiMoreVertical} from 'react-icons/fi';
 import data from './data.json';
 import AddBoard from "./components/AddBoard";
 import DeleteBoard from "./components/DeleteBoard";
+import EditBoard from "./components/EditBoard";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
    const [newBoard, setNewBoard] = useState<boolean>(false);
    const [boardOptions, setOptions] = useState<boolean>(false);
    const [deleteModal, setDeleteModal] = useState<boolean>(false);
+   const [editModal, setEditModal] = useState<boolean>(false);
 
     const handleBoardSelect = (e : React.MouseEvent<HTMLElement>, boardName : any) => {
         setSelected(boardName);
@@ -31,6 +33,10 @@ function App() {
         setDeleteModal(true);
 
         setOptions(false);
+    }
+
+    const handleBoardEditModal = () => {
+        setEditModal(!editModal);
     }
 
     return (
@@ -102,7 +108,7 @@ function App() {
                     />
                     {boardOptions ?
                         <div className="absolute w-48 h-20 bg-slate-900 top-20 flex flex-col justify-center rounded-md pl-4 space-y-2 font-medium">
-                            <h1 className="text-gray-400">
+                            <h1 onClick={handleBoardEditModal} className="text-gray-400">
                                 Edit Board
                             </h1>
                             <h1 onClick={handleBoardDeleteModal} className="text-red-600">
@@ -115,6 +121,7 @@ function App() {
             <div className="w-full h-full">
                 {newBoard ? <AddBoard boards={boards} setNewBoard={setNewBoard} setBoards={setBoards} /> : null}
                 {deleteModal ? <DeleteBoard boards={boards} setDeleteModal={setDeleteModal} setBoards={setBoards} boardSelected={boardSelected} /> : null}
+                {editModal ? <EditBoard boards={boards} boardSelected={boardSelected} setBoards={setBoards} setEditModal={setEditModal} /> : null}
             </div>
         </div>
     </div>
