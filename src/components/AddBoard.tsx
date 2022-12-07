@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {MdClose} from 'react-icons/md';
-import {boardInterface} from '../Interfaces/Board';
+import {Board} from '../Interfaces/Board';
 
 function AddBoard({boards, setNewBoard, setBoards} : any) {
-    const [board, setBoard] = useState<boardInterface>({
+    const [board, setBoard] = useState<Board>({
         name: '',
         columns: []
     })

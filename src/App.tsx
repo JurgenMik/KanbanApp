@@ -6,10 +6,12 @@ import data from './data.json';
 import AddBoard from "./components/AddBoard";
 import DeleteBoard from "./components/DeleteBoard";
 import EditBoard from "./components/EditBoard";
+import Tasks from "./components/Tasks";
+import {Board} from "./Interfaces/Board";
 
 function App() {
 
-   const [boards, setBoards] = useState<object[]>(data.boards);
+   const [boards, setBoards] = useState<Board[]>(data.boards);
    const [boardSelected, setSelected] = useState<string>('Platform Launch');
    const [sidebar, setSideBar] = useState<boolean>(true);
    const [newBoard, setNewBoard] = useState<boolean>(false);
@@ -122,6 +124,7 @@ function App() {
                 {newBoard ? <AddBoard boards={boards} setNewBoard={setNewBoard} setBoards={setBoards} /> : null}
                 {deleteModal ? <DeleteBoard boards={boards} setDeleteModal={setDeleteModal} setBoards={setBoards} boardSelected={boardSelected} /> : null}
                 {editModal ? <EditBoard boards={boards} boardSelected={boardSelected} setBoards={setBoards} setEditModal={setEditModal} /> : null}
+                <Tasks boards={boards} boardSelected={boardSelected} />
             </div>
         </div>
     </div>

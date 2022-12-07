@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {MdClose} from "react-icons/md";
-import {boardInterface} from '../Interfaces/Board';
+import {Board} from '../Interfaces/Board';
 
 function EditBoard({boards, boardSelected, setBoards, setEditModal} : any) {
 
     const editingBoard = boards.find((object : any) => object.name === boardSelected);
 
-    const [board, setBoard] = useState<boardInterface>({...editingBoard});
+    const [board, setBoard] = useState<Board>({...editingBoard});
 
     useEffect(() => {
         setBoard(editingBoard);
