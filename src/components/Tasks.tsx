@@ -22,11 +22,11 @@ function Tasks({boards, boardSelected} : any) {
         <div className="w-full h-full">
             {board.columns.length !== 0 ?
                 <div className="w-full h-full grid grid-cols-5">
-                    {board.columns.map((boardDetails : any) => {
+                    {board.columns.map((boardDetails : any, index : number) => {
                         return (
                             <div className="w-5/6 h-full ml-auto mr-auto" key={boardDetails.name}>
                                 <div className="w-full h-16 flex items-center pl-6 space-x-2">
-                                    <span className="rounded-full p-2 bg-indigo-500">
+                                    <span className={`rounded-full p-2 ${index === 0 ? "bg-cyan-500" : index === 2 ? "bg-emerald-500" : "bg-indigo-500"}`}>
                                     </span>
                                     <h1 className="text-gray-400 font-medium">
                                         {boardDetails.name}({boardDetails.tasks.length})
