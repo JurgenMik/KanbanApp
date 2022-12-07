@@ -61,7 +61,7 @@ function Tasks({boards, boardSelected} : any) {
                     <h1 className="text-xl text-gray-400 font-medium">
                         This board is empty. Create a new column to get started.
                     </h1>
-                    <button className="p-3 bg-indigo-500 text-white font-medium rounded-full">
+                    <button onClick={handleNewColumn} className="p-3 bg-indigo-500 text-white font-medium rounded-full">
                         +Add New Column
                     </button>
                 </div>
