@@ -39,7 +39,7 @@ function AddBoard({boards, setNewBoard, setBoards} : any) {
     }
 
     return (
-        <div className="w-1/3 h-auto bg-slate-800 rounded-md absolute top-56 left-96 pb-8">
+        <div className="w-1/3 h-auto bg-slate-800 rounded-md absolute top-56 left-96 pb-8 shadow-[50px_15px_15px_1150px_rgba(0,0,0,0.56)]">
             <div className="w-4/5 h-full ml-auto mr-auto">
                 <div className="w-full h-24 flex items-center">
                     <h1 className="text-white text-lg font-medium">

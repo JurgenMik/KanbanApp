@@ -13,7 +13,7 @@ function DeleteBoard({boards, setDeleteModal, boardSelected, setBoards} : any) {
     }
 
     return (
-        <div className="w-1/3 h-1/4 bg-slate-800 rounded-md absolute top-72 left-96 pb-8">
+        <div className="w-1/3 h-1/4 bg-slate-800 rounded-md absolute top-72 left-96 pb-8 shadow-[50px_15px_15px_1150px_rgba(0,0,0,0.56)]">
             <div className="w-4/5 h-full ml-auto mr-auto">
                 <div className="w-full h-1/3 flex items-center text-lg font-medium text-red-600">
                     <h1>
