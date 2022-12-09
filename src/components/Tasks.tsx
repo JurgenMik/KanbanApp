@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import TaskDetails from "./TaskDetails";
 import {Board} from "../Interfaces/Board";
 
 function Tasks({boards, boardSelected} : any) {
@@ -6,6 +7,8 @@ function Tasks({boards, boardSelected} : any) {
     const selected = boards.find((object : any) => object.name === boardSelected);
 
     const [board, setBoard] = useState<Board>({...selected});
+    const [taskSelected, setSelected] = useState<boolean>(false)
+    const [taskDetails, setDetails] = useState<Board>();
 
     useEffect(() => {
         setBoard(selected);
@@ -18,8 +21,15 @@ function Tasks({boards, boardSelected} : any) {
         setBoard({...board, columns: newColumn});
     }
 
+    const handleTaskSelected = (e : React.MouseEvent<HTMLElement>, info : any) => {
+        setDetails(info);
+
+        setSelected(true);
+    }
+
     return (
         <div className="w-full h-full">
+            {taskSelected ? <TaskDetails taskDetails={taskDetails} board={board} setSelected={setSelected} /> : null}
             {board.columns.length !== 0 ?
                 <div className="w-full h-full grid grid-cols-5">
                     {board.columns.map((boardDetails : any, index : number) => {
@@ -35,7 +45,7 @@ function Tasks({boards, boardSelected} : any) {
                                 <div className="w-full h-full">
                                     {boardDetails.tasks.map((info : any) => {
                                         return (
-                                            <div className="w-full h-auto mt-6 flex flex-col items-center rounded-lg bg-slate-800 pt-3" key={info.title}>
+                                            <div onClick={e => handleTaskSelected(e, info)} className="w-full h-auto mt-6 flex flex-col items-center rounded-lg bg-slate-800 pt-3" key={info.title}>
                                                 <div className="w-4/5 h-full pb-3">
                                                     <h1 className="font-medium text-white">
                                                         {info.title}
