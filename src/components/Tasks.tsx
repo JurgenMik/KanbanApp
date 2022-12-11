@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import TaskDetails from "./TaskDetails";
 import {Board} from "../Interfaces/Board";
+import DeleteTask from "./DeleteTask";
 
 function Tasks({boards, boardSelected} : any) {
 
@@ -9,6 +10,7 @@ function Tasks({boards, boardSelected} : any) {
     const [board, setBoard] = useState<Board>({...selected});
     const [taskSelected, setSelected] = useState<boolean>(false)
     const [taskDetails, setDetails] = useState<Board>();
+    const [viewDeleteModal, setView] = useState<boolean>(false);
 
     useEffect(() => {
         setBoard(selected);
@@ -27,9 +29,16 @@ function Tasks({boards, boardSelected} : any) {
         setSelected(true);
     }
 
+    const handleDeleteTaskModal = () => {
+        setView(true);
+
+        setSelected(false);
+    }
+
     return (
         <div className="w-full h-full">
-            {taskSelected ? <TaskDetails taskDetails={taskDetails} board={board} setSelected={setSelected} /> : null}
+            {viewDeleteModal ? <DeleteTask taskDetails={taskDetails} setView={setView} setSelected={setSelected} board={board} setBoard={setBoard} /> : null}
+            {taskSelected ? <TaskDetails taskDetails={taskDetails} board={board} setSelected={setSelected} handleDeleteTaskModal={handleDeleteTaskModal} /> : null}
             {board.columns.length !== 0 ?
                 <div className="w-full h-full grid grid-cols-5">
                     {board.columns.map((boardDetails : any, index : number) => {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {FiMoreVertical} from 'react-icons/fi';
 
-function TaskDetails({taskDetails, board, setSelected} : any) {
+function TaskDetails({taskDetails, board, setSelected, handleDeleteTaskModal} : any) {
 
     const [option, setOptions] = useState<boolean>(false);
 
@@ -30,10 +30,10 @@ function TaskDetails({taskDetails, board, setSelected} : any) {
                         {!option ? null :
                             <div className="absolute w-48 h-20 bg-slate-900 top-10 left-50 flex flex-col justify-center rounded-md pl-4 font-medium">
                                 <h1 className="text-gray-400">
-                                    Edit Board
+                                    Edit Task
                                 </h1>
-                                <h1 className="text-red-600">
-                                    Delete Board
+                                <h1 onClick={handleDeleteTaskModal} className="text-red-600">
+                                    Delete Task
                                 </h1>
                                 <h1 onClick={handleCloseModal} className="text-indigo-500 text-sm ml-auto float-right pr-4">
                                     Close
