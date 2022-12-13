@@ -18,6 +18,7 @@ function App() {
    const [boardOptions, setOptions] = useState<boolean>(false);
    const [deleteModal, setDeleteModal] = useState<boolean>(false);
    const [editModal, setEditModal] = useState<boolean>(false);
+   const [addModal, setAddModal] = useState<boolean>(false);
 
     const handleBoardSelect = (e : React.MouseEvent<HTMLElement>, boardName : any) => {
         setSelected(boardName);
@@ -39,6 +40,10 @@ function App() {
 
     const handleBoardEditModal = () => {
         setEditModal(!editModal);
+    }
+
+    const handleAddTaskModal = () => {
+        setAddModal(!addModal);
     }
 
     return (
@@ -101,7 +106,7 @@ function App() {
                     </h1>
                 </div>
                 <div className="w-1/5 flex items-center justify-center space-x-2 relative">
-                    <button className="w-1/2 p-3 bg-indigo-500 rounded-full text-white font-medium">
+                    <button onClick={handleAddTaskModal} className="w-1/2 p-3 bg-indigo-500 rounded-full text-white font-medium hover:bg-indigo-400">
                         +Add New Task
                     </button>
                     <FiMoreVertical
@@ -124,7 +129,7 @@ function App() {
                 {newBoard ? <AddBoard boards={boards} setNewBoard={setNewBoard} setBoards={setBoards} /> : null}
                 {deleteModal ? <DeleteBoard boards={boards} setDeleteModal={setDeleteModal} setBoards={setBoards} boardSelected={boardSelected} /> : null}
                 {editModal ? <EditBoard boards={boards} boardSelected={boardSelected} setBoards={setBoards} setEditModal={setEditModal} /> : null}
-                <Tasks boards={boards} boardSelected={boardSelected} />
+                <Tasks boards={boards} boardSelected={boardSelected} addModal={addModal} />
             </div>
         </div>
     </div>

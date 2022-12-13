@@ -13,3 +13,13 @@ export interface Board {
         }>
     }>
 }
+
+export interface Task {
+    title: string,
+    description: string,
+    status: string,
+    subtasks: Array<{
+        title: string,
+        isCompleted: boolean
+    }>
+}
