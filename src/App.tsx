@@ -110,10 +110,10 @@ function App() {
                     />
                     {boardOptions ?
                         <div className="absolute w-48 h-20 bg-slate-900 top-20 flex flex-col justify-center rounded-md pl-4 space-y-2 font-medium">
-                            <h1 onClick={handleBoardEditModal} className="text-gray-400">
+                            <h1 onClick={handleBoardEditModal} className="text-gray-400 hover:text-gray-600">
                                 Edit Board
                             </h1>
-                            <h1 onClick={handleBoardDeleteModal} className="text-red-600">
+                            <h1 onClick={handleBoardDeleteModal} className="text-red-600 hover:text-red-400">
                                 Delete Board
                             </h1>
                         </div>

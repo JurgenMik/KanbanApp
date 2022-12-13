@@ -79,7 +79,7 @@ function EditBoard({boards, boardSelected, setBoards, setEditModal} : any) {
                                     onChange={e => handleColumnChange(e, index)}
                                 />
                                 <MdClose
-                                    className="text-2xl text-gray-400"
+                                    className="text-2xl text-gray-400 hover:text-red-500"
                                     onClick={e => handleDeleteColumn(e, data.name)}
                                 />
                             </span>

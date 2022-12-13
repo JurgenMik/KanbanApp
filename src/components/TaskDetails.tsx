@@ -35,7 +35,7 @@ function TaskDetails({taskDetails, board, setSelected, handleDeleteTaskModal} : 
                                 <h1 onClick={handleDeleteTaskModal} className="text-red-600">
                                     Delete Task
                                 </h1>
-                                <h1 onClick={handleCloseModal} className="text-indigo-500 text-sm ml-auto float-right pr-4">
+                                <h1 onClick={handleCloseModal} className="text-indigo-500 text-sm ml-auto float-right pr-4 hover:text-red-500">
                                     Close
                                 </h1>
                             </div>
