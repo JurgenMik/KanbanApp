@@ -49,7 +49,7 @@ function Tasks({boards, boardSelected, addModal, setAddModal} : any) {
             {editModal ? <EditTask taskDetails={taskDetails} board={board} setEdit={setEdit} setDetails={setDetails} setBoard={setBoard} /> : null}
             {addModal ? <AddTask board={board} setBoard={setBoard} setAddModal={setAddModal} /> : null}
             {viewDeleteModal ? <DeleteTask taskDetails={taskDetails} setView={setView} setSelected={setSelected} board={board} setBoard={setBoard} /> : null}
-            {taskSelected ? <TaskDetails taskDetails={taskDetails} board={board} setSelected={setSelected} handleDeleteTaskModal={handleDeleteTaskModal} handleEditTaskModal={handleEditTaskModal} /> : null}
+            {taskSelected ? <TaskDetails taskDetails={taskDetails} board={board} setSelected={setSelected} handleDeleteTaskModal={handleDeleteTaskModal} handleEditTaskModal={handleEditTaskModal} setDetails={setDetails} /> : null}
             {board.columns.length !== 0 ?
                 <div className="w-full h-full grid grid-cols-5">
                     {board.columns.map((boardDetails : any, index : number) => {

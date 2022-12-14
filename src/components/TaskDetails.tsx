@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {FiMoreVertical} from 'react-icons/fi';
 
-function TaskDetails({taskDetails, board, setSelected, handleDeleteTaskModal, handleEditTaskModal} : any) {
+function TaskDetails({taskDetails, board, setSelected, handleDeleteTaskModal, handleEditTaskModal, setDetails} : any) {
 
     const [option, setOptions] = useState<boolean>(false);
 
@@ -11,6 +11,14 @@ function TaskDetails({taskDetails, board, setSelected, handleDeleteTaskModal, ha
 
     const handleCloseModal = () => {
         setSelected(false);
+    }
+
+    const handleCheckboxChange = (e : React.ChangeEvent<HTMLInputElement>, index : any) => {
+        let subtask = [...taskDetails.subtasks];
+
+        subtask[index].isCompleted = true;
+
+        setDetails({...taskDetails, subtasks : subtask});
     }
 
     return (
@@ -53,13 +61,14 @@ function TaskDetails({taskDetails, board, setSelected, handleDeleteTaskModal, ha
                     </h1>
                 </div>
                 <div className="w-full h-auto space-y-2 mt-4">
-                    {taskDetails.subtasks.map((task : any) => {
+                    {taskDetails.subtasks.map((task : any, index : any) => {
                         return (
                             <div className="w-full h-12 bg-slate-900 flex items-center rounded space-x-4 hover:bg-indigo-400" key={task.title}>
                                 <input
                                     type="checkbox"
                                     name="isCompleted"
                                     checked={task.isCompleted}
+                                    onChange={e => handleCheckboxChange(e, index)}
                                     className={`ml-4 h-4 w-4 focus:ring-0 focus:border-1 ${task.isCompleted ? "text-indigo-500 rounded-sm" : "bg-slate-800 rounded-sm"}`}
                                 />
                                 <h1 className={`text-sm font-medium ${task.isCompleted ? "text-gray-500 line-through" : "text-white"}`}>
