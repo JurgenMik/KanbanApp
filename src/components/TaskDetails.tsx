@@ -55,7 +55,7 @@ function TaskDetails({taskDetails, board, setSelected, handleDeleteTaskModal} : 
                 <div className="w-full h-auto space-y-2 mt-4">
                     {taskDetails.subtasks.map((task : any) => {
                         return (
-                            <div className="w-full h-12 bg-slate-900 flex items-center rounded space-x-4" key={task.title}>
+                            <div className="w-full h-12 bg-slate-900 flex items-center rounded space-x-4 hover:bg-indigo-400" key={task.title}>
                                 <input
                                     type="checkbox"
                                     name="isCompleted"
