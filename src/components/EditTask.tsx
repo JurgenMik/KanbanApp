@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {MdClose} from "react-icons/md";
 
 function EditTask({taskDetails, board, setEdit, setDetails, setBoard} : any) {
+
+    const [validate, setValidate] = useState({
+        message: ''
+    })
 
     const handleCloseModal = () => {
         setEdit(false);
@@ -31,16 +35,34 @@ function EditTask({taskDetails, board, setEdit, setDetails, setBoard} : any) {
         setDetails({...taskDetails, subtasks : deleteTask});
     }
 
+    const handleValidateSubtasks = () => {
+        let validateError = '';
+
+        taskDetails.subtasks.map((info : any) => {
+            if (info.title === '') {validateError = `Can't be empty`}
+        });
+
+        if (validateError) {
+            setValidate({...validate, message : validateError});
+            return false;
+        }
+        return true;
+    }
+
     const handleSaveChanges = () => {
+        let isValid = handleValidateSubtasks();
+
         const index = board.columns.findIndex((column : any) => column.name === taskDetails.status);
 
         let column = [...board.columns];
         column[index].tasks = board.columns[index].tasks.filter((task : any) => task.title !== taskDetails.title);
         column[index].tasks.push(taskDetails);
 
-        setBoard({...board, columns : column});
+        if (isValid) {
+            setBoard({...board, columns : column});
 
-        setEdit(false);
+            setEdit(false);
+        }
     }
 
     return (
@@ -87,14 +109,14 @@ function EditTask({taskDetails, board, setEdit, setDetails, setBoard} : any) {
                             return (
                                 <span className="h-12 flex items-center space-x-2" key={index}>
                                 <input
-                                    className="w-4/5 p-2 bg-slate-800 border border-gray-700 rounded-md text-gray-400 mb-2"
+                                    className={`w-4/5 p-2 bg-slate-800 border ${!validate.message ? "border-gray-700" : "border-red-600"} rounded-md text-gray-400 mb-2`}
                                     type="text"
                                     name="title"
                                     value={info.title}
                                     onChange={e => handleSubTaskChange(e, index)}
                                 />
                                 <MdClose
-                                    className="text-2xl text-gray-400 hover:text-red-500"
+                                    className={`text-2xl ${!validate.message ? "text-gray-400" : "text-red-600"} hover:text-red-500`}
                                     onClick={e => handleRemoveSubTask(e, info.title)}
                                 />
                             </span>
