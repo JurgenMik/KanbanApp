@@ -4,7 +4,7 @@ import {Board} from "../Interfaces/Board";
 import DeleteTask from "./DeleteTask";
 import AddTask from "./AddTask";
 
-function Tasks({boards, boardSelected, addModal} : any) {
+function Tasks({boards, boardSelected, addModal, setAddModal} : any) {
 
     const selected = boards.find((object : any) => object.name === boardSelected);
 
@@ -38,7 +38,7 @@ function Tasks({boards, boardSelected, addModal} : any) {
 
     return (
         <div className="w-full h-full">
-            {addModal ? <AddTask board={board} setBoard={setBoard} /> : null}
+            {addModal ? <AddTask board={board} setBoard={setBoard} setAddModal={setAddModal} /> : null}
             {viewDeleteModal ? <DeleteTask taskDetails={taskDetails} setView={setView} setSelected={setSelected} board={board} setBoard={setBoard} /> : null}
             {taskSelected ? <TaskDetails taskDetails={taskDetails} board={board} setSelected={setSelected} handleDeleteTaskModal={handleDeleteTaskModal} /> : null}
             {board.columns.length !== 0 ?

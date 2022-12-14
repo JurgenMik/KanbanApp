@@ -129,7 +129,7 @@ function App() {
                 {newBoard ? <AddBoard boards={boards} setNewBoard={setNewBoard} setBoards={setBoards} /> : null}
                 {deleteModal ? <DeleteBoard boards={boards} setDeleteModal={setDeleteModal} setBoards={setBoards} boardSelected={boardSelected} /> : null}
                 {editModal ? <EditBoard boards={boards} boardSelected={boardSelected} setBoards={setBoards} setEditModal={setEditModal} /> : null}
-                <Tasks boards={boards} boardSelected={boardSelected} addModal={addModal} />
+                <Tasks boards={boards} boardSelected={boardSelected} addModal={addModal} setAddModal={setAddModal} />
             </div>
         </div>
     </div>

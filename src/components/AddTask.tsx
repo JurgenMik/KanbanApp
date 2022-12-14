@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import {MdClose} from "react-icons/md";
 import {Task} from "../Interfaces/Board";
 
-function AddTask({board, setBoard} : any) {
+function AddTask({board, setBoard, setAddModal} : any) {
 
+    const [validate, setValidate] = useState({
+        message: ''
+    });
     const [task, setNewTask] = useState<Task>({
         title: '',
         description: '',
@@ -35,13 +38,33 @@ function AddTask({board, setBoard} : any) {
         setNewTask({...task, subtasks : deleteTask});
     }
 
+    const handleValidateSubtasks = () => {
+        let validateError = '';
+
+        task.subtasks.map((info : any) => {
+            if (info.title === '') {validateError = `Can't be empty`}
+        });
+
+        if (validateError) {
+            setValidate({...validate, message : validateError});
+            return false;
+        }
+        return true;
+    }
+
     const handleCreateTask = () => {
+        let isValid : boolean  = handleValidateSubtasks();
+
         const index = board.columns.findIndex((column : any) => column.name === task.status);
 
         let column = [...board.columns];
         column[index].tasks.push(task);
 
-        setBoard({...board, columns : column});
+        if (isValid) {
+            setBoard({...board, columns : column});
+
+            setAddModal(false);
+        }
     }
 
     return (
@@ -84,13 +107,14 @@ function AddTask({board, setBoard} : any) {
                             return (
                                 <span className="h-12 flex items-center space-x-2" key={index}>
                                 <input
-                                    className="w-4/5 p-2 bg-slate-800 border border-gray-700 rounded-md text-gray-400 mb-2"
+                                    className={`w-4/5 p-2 bg-slate-800 border ${!validate.message ? "border-gray-700" : "border-red-600"} rounded-md text-gray-400 mb-2`}
                                     type="text"
+                                    placeholder="e.g make coffee"
                                     name="title"
                                     onChange={e => handleSubTaskChange(e, index)}
                                 />
                                 <MdClose
-                                    className="text-2xl text-gray-400 hover:text-red-500"
+                                    className={`text-2xl ${!validate.message ? "text-gray-400" : "text-red-600"} hover:text-red-500`}
                                     onClick={e => handleRemoveSubTask(e, info.title)}
                                 />
                             </span>
